@@ -243,7 +243,47 @@ export const Editable = (props: EditableProps) => {
           return
         }
 
-        event.preventDefault()
+        let native = false
+        if (
+          type === 'insertText' &&
+          selection &&
+          Range.isCollapsed(selection)
+        ) {
+          // Only do it for single character events, for the simplest scenario,
+          // for now.
+          if (event.data && event.data.length === 1) {
+            native = true
+          }
+
+          // Chrome seems to have issues correctly editing the start of nodes.
+          // I see this when there is an inline element, like a link, and you select
+          // right after it (the start of the next node).
+          const { anchor } = selection
+          if (anchor.offset === 0) {
+            native = false
+          }
+          // and because of the selection moving on line 1348 in `create-editor.tx`.
+          const inline = Editor.match(editor, anchor, 'inline')
+
+          if (inline) {
+            const [, inlinePath] = inline
+
+            if (Editor.isEnd(editor, anchor, inlinePath)) {
+              native = false
+            }
+          }
+
+          // Chrome seems to have issues correctly editing the start of nodes.
+          // I see this when there is an inline element, like a link, and you select
+          // right after it (the start of the next node).
+          //  if (selectionStartPoint.isAtStartOfNode(startTextNode)) {
+          //   canNativelyEdit = false
+          // }
+        }
+
+        if (!native) {
+          event.preventDefault()
+        }
 
         // COMPAT: For the deleting forward/backward input types we don't want
         // to change the selection because it is the range that will be deleted,
@@ -500,6 +540,9 @@ export const Editable = (props: EditableProps) => {
           },
           [readOnly]
         )}
+        onInput={useCallback((event: React.SyntheticEvent) => {
+          editor.flushQueuedNativeOperations()
+        }, [])}
         onBlur={useCallback(
           (event: React.FocusEvent<HTMLDivElement>) => {
             if (
