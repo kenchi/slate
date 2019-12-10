@@ -409,10 +409,11 @@ export const TextTransforms = {
     options: {
       at?: Location
       voids?: boolean
+      native?: boolean
     } = {}
   ) {
     Editor.withoutNormalizing(editor, () => {
-      const { voids = false } = options
+      const { voids = false, native = false } = options
       let { at = editor.selection } = options
 
       if (!at) {
@@ -445,7 +446,7 @@ export const TextTransforms = {
       }
 
       const { path, offset } = at
-      editor.apply({ type: 'insert_text', path, offset, text })
+      editor.apply({ type: 'insert_text', path, offset, text, native })
     })
   },
 }

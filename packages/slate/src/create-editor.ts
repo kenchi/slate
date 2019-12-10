@@ -23,13 +23,18 @@ export const createEditor = (): Editor => {
   const editor: Editor = {
     children: [],
     operations: [],
+    nativeOperationsQueue: [],
     selection: null,
     marks: null,
     isInline: () => false,
     isVoid: () => false,
     onChange: () => {},
-
     apply: (op: Operation) => {
+      if (op.native) {
+        editor.nativeOperationsQueue.push({ ...op, native: false })
+        return
+      }
+
       for (const ref of Editor.pathRefs(editor)) {
         PathRef.transform(ref, op)
       }
