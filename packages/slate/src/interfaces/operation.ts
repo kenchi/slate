@@ -17,6 +17,7 @@ export type BaseInsertTextOperation = {
   path: Path
   offset: number
   text: string
+  [key: string]: unknown
 }
 
 export type InsertTextOperation = ExtendedType<
@@ -85,16 +86,19 @@ export type SetNodeOperation = ExtendedType<
 export type BaseSetSelectionOperation =
   | {
       type: 'set_selection'
+      [key: string]: unknown
       properties: null
       newProperties: Range
     }
   | {
       type: 'set_selection'
+      [key: string]: unknown
       properties: Partial<Range>
       newProperties: Partial<Range>
     }
   | {
       type: 'set_selection'
+      [key: string]: unknown
       properties: Range
       newProperties: null
     }

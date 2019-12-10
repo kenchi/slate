@@ -47,6 +47,7 @@ import {
   PLACEHOLDER_SYMBOL,
   EDITOR_TO_WINDOW,
 } from '../utils/weak-maps'
+import { asNative, NATIVE_OPERATIONS } from '../utils/native'
 
 // COMPAT: Firefox/Edge Legacy don't support the `beforeinput` event
 // Chrome Legacy doesn't support `beforeinput` correctly
@@ -273,7 +274,49 @@ export const Editable = (props: EditableProps) => {
           return
         }
 
-        event.preventDefault()
+        let native = false
+        if (
+          type === 'insertText' &&
+          selection &&
+          Range.isCollapsed(selection) &&
+          // Only do it for single character a-z or space for now.
+          // Long-press events (hold a + press 4 = ä) to choose a special character otherwise
+          // causes duplicate inserts.
+          event.data &&
+          event.data.length === 1 &&
+          /[a-z ]/i.test(event.data) &&
+          // Chrome seems to have issues correctly editing the start of nodes.
+          // I see this when there is an inline element, like a link, and you select
+          // right after it (the start of the next node).
+          selection.anchor.offset !== 0
+        ) {
+          native = true
+
+          // Skip native if there are marks, as that means
+          // `insertText` will insert a node, not just text.
+          if (editor.marks) {
+            native = false
+          }
+
+          // and because of the selection moving in `insertText` (create-editor.tx).
+          const { anchor } = selection
+          const inline = Editor.above(editor, {
+            at: anchor,
+            match: n => Editor.isInline(editor, n),
+            mode: 'highest',
+          })
+          if (inline) {
+            const [, inlinePath] = inline
+
+            if (Editor.isEnd(editor, selection.anchor, inlinePath)) {
+              native = false
+            }
+          }
+        }
+
+        if (!native) {
+          event.preventDefault()
+        }
 
         // COMPAT: For the deleting forward/backward input types we don't want
         // to change the selection because it is the range that will be deleted,
@@ -384,7 +427,13 @@ export const Editable = (props: EditableProps) => {
             if (data instanceof window.DataTransfer) {
               ReactEditor.insertData(editor, data as DataTransfer)
             } else if (typeof data === 'string') {
-              Editor.insertText(editor, data)
+              // Only insertText operations use the native functionality, for now.
+              // Potentially expand to single character deletes, as well.
+              if (native) {
+                asNative(editor, () => Editor.insertText(editor, data))
+              } else {
+                Editor.insertText(editor, data)
+              }
             }
 
             break
@@ -550,6 +599,19 @@ export const Editable = (props: EditableProps) => {
             },
             [readOnly]
           )}
+          onInput={useCallback((event: React.SyntheticEvent) => {
+            // Flush native operations, as native events will have propogated
+            // and we can correctly compare DOM text values in components
+            // to stop rendering, so that browsers functions like autocorrect
+            // and spellcheck work as expected.
+            const nativeOps = NATIVE_OPERATIONS.get(editor)
+            if (nativeOps) {
+              nativeOps.forEach(op => {
+                editor.apply(op)
+              })
+              NATIVE_OPERATIONS.set(editor, [])
+            }
+          }, [])}
           onBlur={useCallback(
             (event: React.FocusEvent<HTMLDivElement>) => {
               if (
@@ -821,7 +883,7 @@ export const Editable = (props: EditableProps) => {
 
                 const element =
                   editor.children[
-                    selection !== null ? selection.focus.path[0] : 0
+                  selection !== null ? selection.focus.path[0] : 0
                   ]
                 const isRTL = getDirection(Node.string(element)) === 'rtl'
 
