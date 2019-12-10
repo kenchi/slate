@@ -5,6 +5,7 @@ import { ReactEditor } from './react-editor'
 import { Key } from '../utils/key'
 import { EDITOR_TO_ON_CHANGE, NODE_TO_KEY } from '../utils/weak-maps'
 import { isDOMText, getPlainText } from '../utils/dom'
+import { AS_NATIVE, NATIVE_OPERATIONS } from '../utils/native'
 
 /**
  * `withReact` adds React and DOM specific behaviors to the editor.
@@ -20,6 +21,18 @@ export const withReact = <T extends Editor>(editor: T) => {
   const { apply, onChange } = e
 
   e.apply = (op: Operation) => {
+    // If we're in native mode, queue the operation
+    // and it will be applied later.
+    if (AS_NATIVE.get(editor)) {
+      const nativeOps = NATIVE_OPERATIONS.get(editor)
+      if (nativeOps) {
+        nativeOps.push(op)
+      } else {
+        NATIVE_OPERATIONS.set(editor, [op])
+      }
+      return
+    }
+
     const matches: [Path, Key][] = []
 
     switch (op.type) {
