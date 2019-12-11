@@ -252,24 +252,21 @@ export const Editable = (props: EditableProps) => {
         if (
           type === 'insertText' &&
           selection &&
-          Range.isCollapsed(selection)
-        ) {
+          Range.isCollapsed(selection) &&
           // Only do it for single character events, for the simplest scenario,
           // for now.
-          if (event.data && event.data.length === 1) {
-            native = true
-          }
-
+          event.data &&
+          event.data.length === 1 &&
           // Chrome seems to have issues correctly editing the start of nodes.
           // I see this when there is an inline element, like a link, and you select
           // right after it (the start of the next node).
-          const { anchor } = selection
-          if (anchor.offset === 0) {
-            native = false
-          }
-          // and because of the selection moving on line 1348 in `create-editor.tx`.
-          const inline = Editor.match(editor, anchor, 'inline')
+          selection.anchor.offset !== 0
+        ) {
+          native = true
 
+          // and because of the selection moving on line 1348 in `create-editor.tx`.
+          const { anchor } = selection
+          const inline = Editor.match(editor, anchor, 'inline')
           if (inline) {
             const [, inlinePath] = inline
 
@@ -277,13 +274,6 @@ export const Editable = (props: EditableProps) => {
               native = false
             }
           }
-
-          // Chrome seems to have issues correctly editing the start of nodes.
-          // I see this when there is an inline element, like a link, and you select
-          // right after it (the start of the next node).
-          //  if (selectionStartPoint.isAtStartOfNode(startTextNode)) {
-          //   canNativelyEdit = false
-          // }
         }
 
         if (!native) {
