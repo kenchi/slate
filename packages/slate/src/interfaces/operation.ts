@@ -13,7 +13,6 @@ export type InsertTextOperation = {
   path: Path
   offset: number
   text: string
-  native?: boolean
   [key: string]: unknown
 }
 
@@ -57,23 +56,23 @@ export type SetNodeOperation = {
 
 export type SetSelectionOperation =
   | {
-    type: 'set_selection'
-    [key: string]: unknown
-    properties: null
-    newProperties: Range
-  }
+      type: 'set_selection'
+      [key: string]: unknown
+      properties: null
+      newProperties: Range
+    }
   | {
-    type: 'set_selection'
-    [key: string]: unknown
-    properties: Partial<Range>
-    newProperties: Partial<Range>
-  }
+      type: 'set_selection'
+      [key: string]: unknown
+      properties: Partial<Range>
+      newProperties: Partial<Range>
+    }
   | {
-    type: 'set_selection'
-    [key: string]: unknown
-    properties: Range
-    newProperties: null
-  }
+      type: 'set_selection'
+      [key: string]: unknown
+      properties: Range
+      newProperties: null
+    }
 
 export type SplitNodeOperation = {
   type: 'split_node'

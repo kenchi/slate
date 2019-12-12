@@ -42,6 +42,7 @@ import {
   IS_FOCUSED,
   PLACEHOLDER_SYMBOL,
 } from '../utils/weak-maps'
+import { asNative, NATIVE_OPERATIONS } from '../utils/native'
 
 // COMPAT: Firefox/Edge Legacy don't support the `beforeinput` event
 // Chrome Legacy doesn't support `beforeinput` correctly
@@ -371,7 +372,13 @@ export const Editable = (props: EditableProps) => {
             if (data instanceof DataTransfer) {
               ReactEditor.insertData(editor, data)
             } else if (typeof data === 'string') {
-              Editor.insertText(editor, data)
+              // Only insert_text operations use the native functionality, for now.
+              // Potentially expand to single character deletes, as well.
+              if (native && type === 'insertText') {
+                asNative(editor, () => Editor.insertText(editor, data))
+              } else {
+                Editor.insertText(editor, data)
+              }
             }
 
             break
@@ -531,7 +538,17 @@ export const Editable = (props: EditableProps) => {
           [readOnly]
         )}
         onInput={useCallback((event: React.SyntheticEvent) => {
-          editor.flushQueuedNativeOperations()
+          // Flush native operations, as native events will have propogated
+          // and we can correctly compare DOM text values in components
+          // to stop rendering, so that browsers functions like autocorrect
+          // and spellcheck work as expected.
+          const nativeOps = NATIVE_OPERATIONS.get(editor)
+          if (nativeOps) {
+            nativeOps.forEach(op => {
+              editor.apply(op)
+            })
+            NATIVE_OPERATIONS.set(editor, [])
+          }
         }, [])}
         onBlur={useCallback(
           (event: React.FocusEvent<HTMLDivElement>) => {
