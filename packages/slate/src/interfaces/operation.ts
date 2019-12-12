@@ -13,7 +13,6 @@ export type InsertTextOperation = {
   path: Path
   offset: number
   text: string
-  native?: boolean
   [key: string]: any
 }
 
