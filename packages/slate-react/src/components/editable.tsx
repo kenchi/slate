@@ -260,7 +260,11 @@ export const Editable = (props: EditableProps) => {
         ) {
           native = true
 
-          // and because of the selection moving on line 1348 in `create-editor.tx`.
+          // Skip native if there are marks, as that means
+          // `insertText` will insert a node, not just text.
+          if (editor.marks) {
+            native = false
+          }
           const { anchor } = selection
           const inline = Editor.match(editor, anchor, 'inline')
           if (inline) {
