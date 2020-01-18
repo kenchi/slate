@@ -270,12 +270,18 @@ export const Editable = (props: EditableProps) => {
           if (editor.marks) {
             native = false
           }
+
+          // and because of the selection moving in `insertText` (create-editor.tx).
           const { anchor } = selection
-          const inline = Editor.match(editor, anchor, 'inline')
+          const inline = Editor.above(editor, {
+            at: anchor,
+            match: n => Editor.isInline(editor, n),
+            mode: 'highest',
+          })
           if (inline) {
             const [, inlinePath] = inline
 
-            if (Editor.isEnd(editor, anchor, inlinePath)) {
+            if (Editor.isEnd(editor, selection.anchor, inlinePath)) {
               native = false
             }
           }
@@ -381,9 +387,9 @@ export const Editable = (props: EditableProps) => {
             if (data instanceof DataTransfer) {
               ReactEditor.insertData(editor, data)
             } else if (typeof data === 'string') {
-              // Only insert_text operations use the native functionality, for now.
+              // Only insertText operations use the native functionality, for now.
               // Potentially expand to single character deletes, as well.
-              if (native && type === 'insertText') {
+              if (native) {
                 asNative(editor, () => Editor.insertText(editor, data))
               } else {
                 Editor.insertText(editor, data)
