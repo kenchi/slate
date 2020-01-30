@@ -206,6 +206,15 @@ export const Editable = (props: EditableProps) => {
         )
       }
       const leafEl = newDomRange.startContainer.parentElement!
+
+      const cursor = newDomRange.getBoundingClientRect()
+      const input = el.getBoundingClientRect()
+      if (cursor.left < input.left) {
+        el.scrollBy(cursor.left - input.left, 0)
+      } else if (cursor.right > input.right) {
+        el.scrollBy(cursor.right - input.right + 1, 0)
+      }
+
       scrollIntoView(leafEl, {
         scrollMode: 'if-needed',
         boundary: el,
