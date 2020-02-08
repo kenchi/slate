@@ -9,7 +9,7 @@ import {
   useSelected,
   useFocused,
   withReact,
-} from 'slate-react'
+} from '@kenchi/slate-react'
 import { withHistory } from 'slate-history'
 import { css } from 'emotion'
 

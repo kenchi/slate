@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react'
 import isUrl from 'is-url'
-import { Slate, Editable, withReact, useSlate } from 'slate-react'
+import { Slate, Editable, withReact, useSlate } from '@kenchi/slate-react'
 import {
   Transforms,
   Editor,

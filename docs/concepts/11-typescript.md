@@ -11,7 +11,7 @@ To define a custom `Element` or `Text` type, extend the `CustomTypes` interface 
 ```ts
 // This example is for an Editor with `ReactEditor` and `HistoryEditor`
 import { BaseEditor } from 'slate'
-import { ReactEditor } from 'slate-react'
+import { ReactEditor } from '@kenchi/slate-react'
 import { HistoryEditor } from 'slate-history'
 
 type CustomText = { text: string; bold: boolean; italic: boolean }
@@ -34,7 +34,7 @@ Using best practices, the custom types might look something like:
 ```ts
 // This example is for an Editor with `ReactEditor` and `HistoryEditor`
 import { BaseEditor } from 'slate'
-import { ReactEditor } from 'slate-react'
+import { ReactEditor } from '@kenchi/slate-react'
 import { HistoryEditor } from 'slate-history'
 
 export type CustomEditor = BaseEditor & ReactEditor & HistoryEditor

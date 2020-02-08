@@ -6,7 +6,7 @@ import {
   useSlateStatic,
   useReadOnly,
   ReactEditor,
-} from 'slate-react'
+} from '@kenchi/slate-react'
 import {
   Editor,
   Transforms,

@@ -8,7 +8,7 @@ import {
   withReact,
   useSelected,
   useFocused,
-} from 'slate-react'
+} from '@kenchi/slate-react'
 
 import { Portal } from '../components'
 import { MentionElement } from './custom-types'
