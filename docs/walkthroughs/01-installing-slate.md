@@ -23,7 +23,7 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { createEditor } from 'slate'
 
 // Import the Slate components and React plugin.
-import { Slate, Editable, withReact } from 'slate-react'
+import { Slate, Editable, withReact } from '@kenchi/slate-react'
 ```
 
 Before we use those imports, let's start with an empty `<App>` component:
@@ -52,7 +52,7 @@ Of course we haven't rendered anything, so you won't see any changes.
 ```ts
 // TypeScript Users only add this code
 import { BaseEditor } from 'slate'
-import { ReactEditor } from 'slate-react'
+import { ReactEditor } from '@kenchi/slate-react'
 
 type CustomElement = { type: 'paragraph'; children: CustomText[] }
 type CustomText = { text: string }
