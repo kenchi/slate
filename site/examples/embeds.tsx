@@ -11,7 +11,7 @@ import {
   withReact,
   useSlateStatic,
   ReactEditor,
-} from 'slate-react'
+} from '@kenchi/slate-react'
 
 const EmbedsExample = () => {
   const [value, setValue] = useState<Descendant[]>(initialValue)

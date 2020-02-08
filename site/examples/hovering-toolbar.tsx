@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useRef, useEffect } from 'react'
-import { Slate, Editable, ReactEditor, withReact, useSlate } from 'slate-react'
+import { Slate, Editable, ReactEditor, withReact, useSlate } from '@kenchi/slate-react'
 import {
   Editor,
   Transforms,

@@ -7,7 +7,7 @@ import {
   Descendant,
   BaseEditor,
 } from 'slate'
-import { ReactEditor } from 'slate-react'
+import { ReactEditor } from '@kenchi/slate-react'
 import { HistoryEditor } from 'slate-history'
 
 export type BlockQuoteElement = { type: 'block-quote'; children: Descendant[] }

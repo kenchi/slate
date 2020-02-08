@@ -10,7 +10,7 @@ For example if you wanted to render custom element components, you'd pass in the
 
 ```jsx
 import { createEditor } from 'slate'
-import { Slate, Editable, withReact } from 'slate-react'
+import { Slate, Editable, withReact } from '@kenchi/slate-react'
 
 const MyEditor = () => {
   const editor = useMemo(() => withReact(createEditor()), [])
