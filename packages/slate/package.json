@@ -1,7 +1,7 @@
 {
   "name": "@kenchikka/slate",
   "description": "A completely customizable framework for building rich text editors.",
-  "version": "0.57.1",
+  "version": "0.57.1-kenchi.0",
   "license": "MIT",
   "repository": "git://github.com/kenchikka/slate.git",
   "main": "dist/index.js",
