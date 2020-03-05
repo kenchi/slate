@@ -1,7 +1,7 @@
 {
   "name": "@kenchi/slate-history",
   "description": "An operation-based history implementation for Slate editors.",
-  "version": "0.57.1-kenchi.0",
+  "version": "0.57.1-kenchi.1",
   "license": "MIT",
   "repository": "git://github.com/kenchi/slate.git",
   "main": "dist/index.js",
@@ -18,8 +18,8 @@
     "is-plain-object": "^3.0.0"
   },
   "devDependencies": {
-    "@kenchi/slate": "^0.57.1-kenchi.0",
-    "@kenchi/slate-hyperscript": "^0.57.1-kenchi.0"
+    "@kenchi/slate": "^0.57.1-kenchi.1",
+    "@kenchi/slate-hyperscript": "^0.57.1-kenchi.1"
   },
   "peerDependencies": {
     "slate": ">=0.55.0"
