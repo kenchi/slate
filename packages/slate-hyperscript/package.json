@@ -1,9 +1,9 @@
 {
-  "name": "@kenchikka/slate-hyperscript",
+  "name": "@kenchi/slate-hyperscript",
   "description": "A hyperscript helper for creating Slate documents.",
   "version": "0.57.1-kenchi.0",
   "license": "MIT",
-  "repository": "git://github.com/kenchikka/slate.git",
+  "repository": "git://github.com/kenchi/slate.git",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "types": "dist/index.d.ts",
@@ -17,7 +17,7 @@
     "is-plain-object": "^3.0.0"
   },
   "devDependencies": {
-    "@kenchikka/slate": "^0.57.1-kenchi.0"
+    "@kenchi/slate": "^0.57.1-kenchi.0"
   },
   "peerDependencies": {
     "slate": ">=0.55.0"
