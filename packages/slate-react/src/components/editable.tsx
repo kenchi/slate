@@ -204,7 +204,10 @@ export const Editable = (props: EditableProps) => {
         el.scrollBy(cursor.right - input.right + 1, 0)
       }
 
-      scrollIntoView(leafEl, { scrollMode: 'if-needed' })
+      scrollIntoView(leafEl, {
+        scrollMode: 'if-needed',
+        boundary: el,
+      })
     }
 
     setTimeout(() => {
