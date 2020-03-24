@@ -2766,6 +2766,11 @@
   dependencies:
     "@types/node" ">= 8"
 
+"@types/debounce@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@types/debounce/-/debounce-1.2.0.tgz#9ee99259f41018c640b3929e1bb32c3dcecdb192"
+  integrity sha512-bWG5wapaWgbss9E238T0R6bfo5Fh3OkeoSt245CM7JJwVwpw6MEBCbIxLq5z8KzsE3uJhzcIuQkyiZmzV3M/Dw==
+
 "@types/eslint-visitor-keys@^1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@types/eslint-visitor-keys/-/eslint-visitor-keys-1.0.0.tgz#1ee30d79544ca84d68d4b3cdb0af4f205663dd2d"
@@ -4164,11 +4169,6 @@ compose-function@3.0.3:
   dependencies:
     arity-n "^1.0.4"
 
-compute-scroll-into-view@1.0.11:
-  version "1.0.11"
-  resolved "https://registry.yarnpkg.com/compute-scroll-into-view/-/compute-scroll-into-view-1.0.11.tgz#7ff0a57f9aeda6314132d8994cce7aeca794fecf"
-  integrity sha512-uUnglJowSe0IPmWOdDtrlHXof5CTIJitfJEyITHBW6zDVOGu9Pjk5puaLM73SLcwak0L4hEjO7Td88/a6P5i7A==
-
 concat-map@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/concat-map/-/concat-map-0.0.1.tgz#d8a96bd77fd68df7793a73036a3ba0d5405d477b"
@@ -4655,6 +4655,11 @@ dateformat@^3.0.0:
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/dateformat/-/dateformat-3.0.3.tgz#a6e37499a4d9a9cf85ef5872044d62901c9889ae"
   integrity sha512-jyCETtSl3VMZMWeRo7iY1FL19ges1t55hMo5yaam4Jrsm5EPL89UQkoQRyiI+Yf4k8r2ZpdngkV8hr1lIdjb3Q==
+
+debounce@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/debounce/-/debounce-1.2.0.tgz#44a540abc0ea9943018dc0eaa95cce87f65cd131"
+  integrity sha512-mYtLl1xfZLi1m4RtQYlZgJUNQjl4ZxVnHzIR8nLLgi4q1YT8o/WM+MK/f8yfcc9s5Ir5zRaPZyZU6xs1Syoocg==
 
 debug@3.1.0:
   version "3.1.0"
@@ -9858,13 +9863,6 @@ schema-utils@^2.6.0, schema-utils@^2.6.1:
     ajv "^6.12.0"
     ajv-keywords "^3.4.1"
 
-scroll-into-view-if-needed@^2.2.20:
-  version "2.2.20"
-  resolved "https://registry.yarnpkg.com/scroll-into-view-if-needed/-/scroll-into-view-if-needed-2.2.20.tgz#3a46847a72233a3af9770e55df450f2a7f2e2a0e"
-  integrity sha512-P9kYMrhi9f6dvWwTGpO5I3HgjSU/8Mts7xL3lkoH5xlewK7O9Obdc5WmMCzppln7bCVGNmf3qfoZXrpCeyNJXw==
-  dependencies:
-    compute-scroll-into-view "1.0.11"
-
 select@^1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/select/-/select-1.1.2.tgz#0e7350acdec80b1108528786ec1d4418d11b396d"
@@ -9985,6 +9983,44 @@ slash@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/slash/-/slash-2.0.0.tgz#de552851a1759df3a8f206535442f5ec4ddeab44"
   integrity sha512-ZYKh3Wh2z1PpEXWr0MpSBZ0V6mZHAQfYevttO11c51CaWjGTaadiKZ+wVt1PbMlDV5qhMFslpZCemhwOK7C89A==
+
+"slate-history@npm:@kenchi/slate-history":
+  version "0.57.1-kenchi.1"
+  resolved "https://npm.pkg.github.com/download/@kenchi/slate-history/0.57.1-kenchi.1/7d27b4642dbde13eea9e4671e94fe05b26f9de5eea79cf231ba743c851fcc974#b6e0d6bbbe0acadfcde7fa0678313ea63adadd7a"
+  integrity sha512-WMG14ptRmuBNQQyEK6h9fTbZwuSgfYeJG4ARggHJ1XjAJmrdFEcBreG0jvFsOgX1Uv8ZyZFqJiUYQiNvqrHm/w==
+  dependencies:
+    immer "^5.0.0"
+    is-plain-object "^3.0.0"
+
+"slate-hyperscript@npm:@kenchi/slate-hyperscript":
+  version "0.57.1-kenchi.1"
+  resolved "https://npm.pkg.github.com/download/@kenchi/slate-hyperscript/0.57.1-kenchi.1/731ce244ffa7163d15b68e9e9e79308efe2504ef0ccf6afb566c6a5e599b983d#f1d09dc2000e74f5860c678c740d9f489a054cf1"
+  integrity sha512-YZF62EJd/AXM4bBl7KElHHEpuHmzEUv/SKlqJ3pQun7lQkfbBL4je4j2ArdOitFuWS8orZgj79B0Ecq/GqS2KA==
+  dependencies:
+    is-plain-object "^3.0.0"
+
+"slate-react@npm:@kenchi/slate-react":
+  version "0.57.1-kenchi.3"
+  resolved "https://npm.pkg.github.com/download/@kenchi/slate-react/0.57.1-kenchi.3/619a5c52a6ee435b3fc70e8aa194e0a6c5548b6c68425d6f2fe199e4f323c7bf#d9f07d33cce7d554b4a15ec80bf21230fa53c7d7"
+  integrity sha512-Qs7UuPZmg0ue8hPt+y4/YvwZHmNS/C1y6NTaPy3G/+zkvZRYJK6EF08zXd5WFoFqcbkIB/v4sQhVGdEOvpRWAQ==
+  dependencies:
+    "@types/debounce" "^1.2.0"
+    "@types/is-hotkey" "^0.1.1"
+    debounce "^1.2.0"
+    direction "^1.0.3"
+    is-hotkey "^0.1.6"
+    is-plain-object "^3.0.0"
+
+"slate@npm:@kenchi/slate":
+  version "0.57.1-kenchi.1"
+  resolved "https://npm.pkg.github.com/download/@kenchi/slate/0.57.1-kenchi.1/4961c0fc4a59be012629b4c3c1019b834bc02484870956719759e9d7f477bd26#4938642de76aaf578c1337763ccda3f91d855caa"
+  integrity sha512-xc23+0KnTSNjWcylX6/y1uLGkufw8Zhv9Axx9WuadHAjELpYTvlix6SolTAja03OYsC6niJywRlX05jDdZcYIA==
+  dependencies:
+    "@types/esrever" "^0.2.0"
+    esrever "^0.2.0"
+    immer "^5.0.0"
+    is-plain-object "^3.0.0"
+    tiny-warning "^1.0.3"
 
 slice-ansi@^2.1.0:
   version "2.1.0"
