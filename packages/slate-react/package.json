@@ -19,8 +19,7 @@
     "debounce": "^1.2.0",
     "direction": "^1.0.3",
     "is-hotkey": "^0.1.6",
-    "is-plain-object": "^3.0.0",
-    "scroll-into-view-if-needed": "^2.2.20"
+    "is-plain-object": "^3.0.0"
   },
   "devDependencies": {
     "@kenchi/slate": "^0.57.1-kenchi.1",

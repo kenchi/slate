@@ -9,7 +9,6 @@ import {
   Transforms,
 } from 'slate'
 import debounce from 'debounce'
-import scrollIntoView from 'scroll-into-view-if-needed'
 
 import Children from './children'
 import Hotkeys from '../utils/hotkeys'
@@ -204,10 +203,7 @@ export const Editable = (props: EditableProps) => {
         el.scrollBy(cursor.right - input.right + 1, 0)
       }
 
-      scrollIntoView(leafEl, {
-        scrollMode: 'if-needed',
-        boundary: el,
-      })
+      leafEl.scrollIntoView({ block: 'nearest' })
     }
 
     setTimeout(() => {
