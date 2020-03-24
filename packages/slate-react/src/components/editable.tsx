@@ -12,7 +12,6 @@ import {
 import getDirection from 'direction'
 import { HistoryEditor } from 'slate-history'
 import throttle from 'lodash/throttle'
-import scrollIntoView from 'scroll-into-view-if-needed'
 
 import useChildren from '../hooks/use-children'
 import Hotkeys from '../utils/hotkeys'
@@ -228,14 +227,7 @@ export const Editable = (props: EditableProps) => {
       }
 
       const leafEl = newDomRange.startContainer.parentElement!
-      leafEl.getBoundingClientRect = newDomRange.getBoundingClientRect.bind(
-        newDomRange
-      )
-      scrollIntoView(leafEl, {
-        scrollMode: 'if-needed',
-        boundary: el,
-      })
-      delete leafEl.getBoundingClientRect
+      leafEl.scrollIntoView({ block: 'nearest' })
     } else {
       domSelection.removeAllRanges()
     }
