@@ -583,8 +583,10 @@ export const Editable = (props: EditableProps) => {
           // and spellcheck work as expected.
           const nativeOps = NATIVE_OPERATIONS.get(editor)
           if (nativeOps) {
-            nativeOps.forEach(op => {
-              editor.apply(op)
+            Editor.withoutNormalizing(editor, () => {
+              nativeOps.forEach(op => {
+                editor.apply(op)
+              })
             })
             NATIVE_OPERATIONS.set(editor, [])
           }
