@@ -1,7 +1,7 @@
 {
   "name": "@kenchi/slate-react",
   "description": "Tools for building completely customizable richtext editors with React.",
-  "version": "0.58.5-kenchi.0",
+  "version": "0.58.5-kenchi.1",
   "license": "MIT",
   "repository": "git://github.com/kenchi/slate.git",
   "main": "dist/index.js",
@@ -22,8 +22,8 @@
     "lodash": "^4.17.4"
   },
   "devDependencies": {
-    "@kenchi/slate": "^0.58.5-kenchi.0",
-    "@kenchi/slate-hyperscript": "^0.58.5-kenchi.0"
+    "@kenchi/slate": "^0.58.5-kenchi.1",
+    "@kenchi/slate-hyperscript": "^0.58.5-kenchi.1"
   },
   "peerDependencies": {
     "react": ">=16.8.0",
